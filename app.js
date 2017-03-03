@@ -1,41 +1,100 @@
-var quiz = {
+//single state object
+
+var state = {
 	questions: [
-		{
-		question: 'What colour is the sky?',
-		answers: ['blue', 'green', 'red', 'black'], 
-		answerCorrect: 0
-		}
-	],
+	{ 
+		question: 'Approximately how many degrees can a three-toed sloth rotate its head?',
+    	answers: [ '90&deg', '150&deg', '210&deg', '270&deg' ],
+   		answerCorrect: 3 },
+  	{ 
+  		question: 'How many toes does a two-toed sloth have?',
+    	answers: [ 'none', 1, 2, 3 ],
+    	answerCorrect: 3 },
+  	{ 
+  		question: 'Which of these activies does a sloth do faster?',
+    	answers: [ 'climbing', 'swimming', 'crawling', 'rolling' ],
+    	answerCorrect: 1 },
+  	{ 
+  		question: 'Approximately how many hours a day does a sloth sleep?',
+    	answers: [ 10, 13, 16, 19 ],
+    	answerCorrect: 0 },
+ 	{ 
+ 		question: 'What does the diet of a sloth mainly consist of?',
+    	answers: [ 'bark', 'leaves', 'insects', 'rodents' ],
+    	answerCorrect: 1 },
+  	{ 
+  		question: 'What animal class does the sloth belong to?',
+    	answers: [ 'reptiles', 'cnidarians', 'marsupials', 'mammals' ],
+    	answerCorrect: 3 },
+  	{ 
+  		question: 'How much does a two-toed sloth weigh?',
+    	answers: [ '2-6 kg', '4-9 kg', '6-12 kg', '9-15 kg' ],
+    	answerCorrect: 1 },
+  	{ 
+  		question: 'In what part of the world do sloths live',
+    	answers: 
+     		[ 'Central and North America',
+       		'Australia',
+       		'Central and South America',
+       		'South East Asia' ],
+    	answerCorrect: 2 },
+  	{ 
+  		question: 'What does the scientific name for sloths - Bradypus - mean?',
+    	answers: [ 'happy feet', 'slow feet', 'sharp toes', 'always smiling' ],
+    	answerCorrect: 1 },
+  	{ 
+  		question: 'Where do sloths spend most of their time?',
+    	answers: [ 'In caves', 'Under trees', 'In the ocean', 'In trees' ],
+    	answerCorrect: 3 } ],
+
 	currentQuestion: 0,
 	userScore: 0
 }
 
-function Question(question, ans1, ans2, ans3, ans4, correct){
-	this.question = question;
-	this.answers = [ans1, ans2, ans3, ans4];
-	this.answerCorrect = correct;
+
+//state modification functions
+//Pass these into event listener functions?
+
+
+
+//functions that render state
+//one single function for each part of the page that one wants to update
+function removeStartPage () {
+	$(.'js-startPage').remove();
 }
 
-var q1 = new Question('Approximately how many degrees can a three-toed sloth rotate its head?', 90&deg, 150&deg, 210&deg, 270&deg, 3);
-var q2 = new Question('How many toes does a two-toed sloth have?', 'none', 1, 2, 3, 3);
-var q3 = new Question('Which of these activies does a sloth do faster?', 'climbing', 'swimming', 'crawling', 'rolling', 1);
-var q4 = new Question('Approximately how many hours a day does a sloth sleep?', 10, 13, 16, 19, 0);
-var q5 = new Question('What does the diet of a sloth mainly consist of?', 'bark', 'leaves', 'insects', 'rodents', 1);
-var q6 = new Question('What animal class does the sloth belong to?', 'reptiles', 'cnidarians','marsupials', 'mammals', 3);
-var q7 = new Question('How much does a two-toed sloth weigh?', '2-6 kg', '4-9 kg', '6-12 kg', '9-15 kg', 1);
-var q8 = new Question('In what part of the world do sloths live', 'Central and North America', 'Australia','Central and South America', 'South East Asia', 2);
-var q9 = new Question('What does the scientific name for sloths - Bradypus - mean?', 'happy feet', 'slow feet', 'sharp toes', 'always smiling', 1);
-var q10 = new Question('Where do sloths spend most of their time?', 'In caves', 'Under trees', 'In the ocean', 'In trees', 3);
+function postNextQuestion () {
+	var questionPosition = state.questions[i];
 
-var list = {q1, q2, q3, q4, q5, q6, q7, q8, q9, q10};
+		$('#questionPosition').append(
+			"<div class = 'question-container col-8'>" +
+			"<p class='question'>" + questionPosition.question + "</p><br>" +
+			"<button class='button0 js-answer' value = '0'>" + .questionPosition.answers[0] + "</button><br>" +
+			"<button class='button1 js-answer' value = '1'>" + .questionPosition.answers[1] + "</button><br>" +
+			"<button class='button2 js-answer' value = '2'>" + .questionPosition.answers[2] + "</button><br>" +
+			"<button class='button3 js-answer' value = '3'>" + .questionPosition.answers[3] + "</button>" +
+		"</div>" +)
+}
 
-var question = [
-	{question: 'What colour is the sky?',
-	answers: ['blue', 'green', 'red', 'black'], 
-	answerCorrect: 0
-}];
+function showContinueButton() {
+	$('.continue').removeClass('hidden');
+}
 
-console.log(list);
+
+/*
+Render functions example from Thinkful
+
+var renderList = function(state, element) {
+    var itemsHTML = state.items.map(function(item) {
+        return '<li>' + item + '</li>';
+    });
+    element.html(itemsHTML);
+};*/
+
+
+//
+
+
 
 function clickStart(){
 	$('button')on('click', '.js-answer', function(event){
@@ -49,17 +108,26 @@ function clickContinue(){
 	$('button')on('click', '.js-continue', function(event){
 		//some function that removes old question
 		state.currentQuestion += 1;
+		$()
 		//some function that shows new question
 		//increment count for question
+	$('.js-continue').addClass('hidden');
+
 	});
 }
 
 function clickAnswer(){
 	$('button')on('click', '.js-answer', function(event){
 		//if right alert right, else if wrong alert wrong and correct answer
+		var chosenAnswer = $(this).val();
+		if( chosenAnswer === answercorrect[i]) {
+			//increment number of right or wromg answers
+			state.userScore += 1;
+		}
+
+		$('.js-continue').removeClass('hidden');
+
 		//show continue button
-		//increment number of right or wromg answers
-		state.userScore += 1;
 		//remove class hidden from continue button
 });
 }

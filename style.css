@@ -38,6 +38,14 @@ button:hover {
 	text-align: right;
 	margin: auto;
 }
+
+.positionLeft {
+    text-align: left;
+    display: inline-block;
+    vertical-align: middle;
+    width: 70%;
+}
+
 .continue {
 	width: 25%;
 	background-color: #f9f9f9;
@@ -57,4 +65,26 @@ button:hover {
 .sides{
 	height: 200px;
 	width: 100%;
+}
+
+.hidden {
+	visibility: hidden;
+}
+
+.wrong {
+	font-size: 140%;
+	font-weight: 700;
+	color: #313E40;
+}
+
+.response-row {
+text-align: center;
+}
+
+.button-correct {
+	background-color: #9DDC69;
+}
+
+.button-chosen {
+	background-color: #286978;
 }
