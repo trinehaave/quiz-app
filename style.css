@@ -58,7 +58,7 @@ button:hover {
 }
 
 .question {
-	margin-top: 100px;
+	margin-top: 70px;
 	color: #313E40;
 }
 
@@ -81,10 +81,19 @@ button:hover {
 text-align: center;
 }
 
+/*.button-chosen {
+	background-color: #286978;
+}*/
+
 .button-correct {
 	background-color: #9DDC69;
 }
 
-.button-chosen {
-	background-color: #286978;
+.response1 {
+	font-weight: 600;
+	font-size: 110%;
+}
+
+.response2 {
+	color: slategrey;
 }

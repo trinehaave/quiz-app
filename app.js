@@ -23,7 +23,7 @@ var state = {
     	answers: [ 'bark', 'leaves', 'insects', 'rodents' ],
     	answerCorrect: 1 },
   	{ 
-  		question: 'What animal class does the sloth belong to?',
+  		question: 'Which animal class does the sloth belong to?',
     	answers: [ 'reptiles', 'cnidarians', 'marsupials', 'mammals' ],
     	answerCorrect: 3 },
   	{ 
@@ -50,6 +50,7 @@ var state = {
 	currentQuestion: 0,
 	userScore: 0
 }
+
 function clickAnswer(){
 	$('#yup').on('click', 'button', function(event){
 		event.preventDefault();
@@ -62,11 +63,22 @@ function clickAnswer(){
 		if(chosenAnswer == state.questions[state.currentQuestion].answerCorrect) {
 			//increment number of right or wromg answers
 			state.userScore += 1;
+			$('.response1').text('Correct!');
+			$('.response2').text('');
+		} else {
+			$('.response1').text('Wrong :(');
+			$('.response2').text('The correct answer is highlighted!');
 		}
 
+		$('.button' + state.questions[state.currentQuestion].answerCorrect).addClass('button-correct');
+		$(this).addClass('button-chosen');
+
+		$('.result').removeClass('hidden');
 		console.log(state.userScore);
 
-		$('.continue-container').removeClass('hidden');
+		$('.js-continue').removeClass('hidden');
+
+		$('.js-answer').attr('disabled', true);
 
 		//show continue button
 		//remove class hidden from continue button
@@ -79,9 +91,11 @@ function clickContinue(){
 
 		state.currentQuestion += 1;
 
-		$(this).addClass('hidden');
+		$('.js-continue').addClass('hidden');
+		$('.result').addClass('hidden');
 		$('section').remove();
-		
+
+
 		$('#yup').append("<section class = 'question-container col-8'>" +
 			"<p class='question'>" + state.questions[state.currentQuestion].question + "</p><br>" +
 			"<button class='button0 js-answer' value = '0'>" + state.questions[state.currentQuestion].answers[0] + "</button><br>" +
@@ -90,13 +104,18 @@ function clickContinue(){
 			"<button class='button3 js-answer' value = '3'>" + state.questions[state.currentQuestion].answers[3] + "</button>" +
 		"</section>");
 
+		$('.js-count').text("Question: " + (state.currentQuestion + 1) + "/" + state.questions.length);
+		$('.js-score').text("Correct: " + state.userScore + "/" + state.currentQuestion);
+
+
 	});
 }
 
 $(function(){
-  
+
   clickContinue();
   clickAnswer();
+
 });
 
 /*
