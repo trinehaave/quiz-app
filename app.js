@@ -61,18 +61,18 @@ function clickStart() {
 
 function clickAnswer(){
 	$('#yup').on('click', 'button', function(event){
+		
 		event.preventDefault();
-		//if right alert right, else if wrong alert wrong and correct answer
-		console.log('hi!');
 		var chosenAnswer = $(this).val();
 
 		console.log(chosenAnswer);
 
 		if(chosenAnswer == state.questions[state.currentQuestion].answerCorrect) {
-			//increment number of right or wromg answers
+			
 			state.userScore += 1;
 			$('.response1').text('Correct!');
 			$('.response2').text('');
+
 		} else {
 			$('.response1').text('Wrong :(');
 			$('.response2').text('The correct answer is highlighted!');
@@ -87,9 +87,6 @@ function clickAnswer(){
 		$('.js-continue').removeClass('hidden');
 
 		$('.js-answer').attr('disabled', true);
-
-		//show continue button
-		//remove class hidden from continue button
 	});
 }
 
@@ -103,6 +100,13 @@ function clickContinue(){
 		$('.result').addClass('hidden');
 		$('section').remove();
 
+		if(state.currentQuestion > 9) {
+			$('body').append('<h1 class="end">You\'re done!</h1><p class ="endScore">You scored ' + state.userScore + " out of " + state.currentQuestion);
+			$('.js-count').remove();
+			$('.js-score').remove();
+
+		} else {
+
 
 		$('#yup').append("<section class = 'question-container col-8'>" +
 			"<p class='question'>" + state.questions[state.currentQuestion].question + "</p><br>" +
@@ -114,6 +118,7 @@ function clickContinue(){
 
 		$('.js-count').text("Question: " + (state.currentQuestion + 1) + "/" + state.questions.length);
 		$('.js-score').text("Correct: " + state.userScore + "/" + state.currentQuestion);
+	}
 
 
 	});
