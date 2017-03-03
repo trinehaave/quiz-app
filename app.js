@@ -31,7 +31,7 @@ var state = {
     	answers: [ '2-6 kg', '4-9 kg', '6-12 kg', '9-15 kg' ],
     	answerCorrect: 1 },
   	{ 
-  		question: 'In what part of the world do sloths live',
+  		question: 'In what part of the world do sloths live?',
     	answers: 
      		[ 'Central and North America',
        		'Australia',
@@ -50,8 +50,56 @@ var state = {
 	currentQuestion: 0,
 	userScore: 0
 }
+function clickAnswer(){
+	$('#yup').on('click', 'button', function(event){
+		event.preventDefault();
+		//if right alert right, else if wrong alert wrong and correct answer
+		console.log('hi!');
+		var chosenAnswer = $(this).val();
 
+		console.log(chosenAnswer);
 
+		if(chosenAnswer == state.questions[state.currentQuestion].answerCorrect) {
+			//increment number of right or wromg answers
+			state.userScore += 1;
+		}
+
+		console.log(state.userScore);
+
+		$('.continue-container').removeClass('hidden');
+
+		//show continue button
+		//remove class hidden from continue button
+	});
+}
+
+function clickContinue(){
+	$('div').on('click', '.continue-container', function(event){
+		event.preventDefault();
+
+		state.currentQuestion += 1;
+
+		$(this).addClass('hidden');
+		$('section').remove();
+		
+		$('#yup').append("<section class = 'question-container col-8'>" +
+			"<p class='question'>" + state.questions[state.currentQuestion].question + "</p><br>" +
+			"<button class='button0 js-answer' value = '0'>" + state.questions[state.currentQuestion].answers[0] + "</button><br>" +
+			"<button class='button1 js-answer' value = '1'>" + state.questions[state.currentQuestion].answers[1] + "</button><br>" +
+			"<button class='button2 js-answer' value = '2'>" + state.questions[state.currentQuestion].answers[2] + "</button><br>" +
+			"<button class='button3 js-answer' value = '3'>" + state.questions[state.currentQuestion].answers[3] + "</button>" +
+		"</section>");
+
+	});
+}
+
+$(function(){
+  
+  clickContinue();
+  clickAnswer();
+});
+
+/*
 //state modification functions
 //Pass these into event listener functions?
 
@@ -80,7 +128,6 @@ function showContinueButton() {
 	$('.continue').removeClass('hidden');
 }
 
-
 /*
 Render functions example from Thinkful
 
@@ -92,10 +139,8 @@ var renderList = function(state, element) {
 };*/
 
 
-//
 
-
-
+/*
 function clickStart(){
 	$('button')on('click', '.js-answer', function(event){
 		//if right, alert right, else if wrong, alert wrong and show correct answer
@@ -131,4 +176,4 @@ function clickAnswer(){
 		//remove class hidden from continue button
 });
 }
-
+*/
