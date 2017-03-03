@@ -51,6 +51,14 @@ var state = {
 	userScore: 0
 }
 
+function clickStart() {
+	$('.js-startPage').on('click', 'button', function(event) {
+		event.preventDefault();
+		$('.js-startPage').remove();
+		$('#yup').removeClass('hidden');
+	})
+};
+
 function clickAnswer(){
 	$('#yup').on('click', 'button', function(event){
 		event.preventDefault();
@@ -112,9 +120,9 @@ function clickContinue(){
 }
 
 $(function(){
-
-  clickContinue();
-  clickAnswer();
+	clickStart();
+  	clickContinue();
+  	clickAnswer();
 
 });
 
