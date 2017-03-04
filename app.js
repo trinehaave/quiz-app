@@ -80,6 +80,7 @@ function clickAnswer(){
 
 		$('.button' + state.questions[state.currentQuestion].answerCorrect).addClass('button-correct');
 		$(this).addClass('button-chosen');
+		$('button').removeClass('hover');
 
 		$('.result').removeClass('hidden');
 		console.log(state.userScore);
@@ -110,9 +111,9 @@ function clickContinue(){
 
 		$('#yup').append("<section class = 'question-container col-8'>" +
 			"<p class='question'>" + state.questions[state.currentQuestion].question + "</p><br>" +
-			"<button class='button0 js-answer' value = '0'>" + state.questions[state.currentQuestion].answers[0] + "</button><br>" +
-			"<button class='button1 js-answer' value = '1'>" + state.questions[state.currentQuestion].answers[1] + "</button><br>" +
-			"<button class='button2 js-answer' value = '2'>" + state.questions[state.currentQuestion].answers[2] + "</button><br>" +
+			"<button class='button0 js-answer hover' value = '0'>" + state.questions[state.currentQuestion].answers[0] + "</button><br>" +
+			"<button class='button1 js-answer hover' value = '1'>" + state.questions[state.currentQuestion].answers[1] + "</button><br>" +
+			"<button class='button2 js-answer hover' value = '2'>" + state.questions[state.currentQuestion].answers[2] + "</button><br>" +
 			"<button class='button3 js-answer' value = '3'>" + state.questions[state.currentQuestion].answers[3] + "</button>" +
 		"</section>");
 

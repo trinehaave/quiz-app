@@ -29,7 +29,11 @@ button {
 	border-radius: 4px;
 }
 
-button:hover {
+.button-chosen {
+	background-color: #86BEC8;
+}
+
+.hover:hover {
 	cursor: pointer;
 	background-color: #75b8c4;
 }
@@ -60,6 +64,7 @@ button:hover {
 
 .continue:hover {
 	background-color: #fff;
+	cursor: pointer;
 }
 
 .question {
