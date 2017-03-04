@@ -114,7 +114,7 @@ function clickContinue(){
 			"<button class='button0 js-answer hover' value = '0'>" + state.questions[state.currentQuestion].answers[0] + "</button><br>" +
 			"<button class='button1 js-answer hover' value = '1'>" + state.questions[state.currentQuestion].answers[1] + "</button><br>" +
 			"<button class='button2 js-answer hover' value = '2'>" + state.questions[state.currentQuestion].answers[2] + "</button><br>" +
-			"<button class='button3 js-answer' value = '3'>" + state.questions[state.currentQuestion].answers[3] + "</button>" +
+			"<button class='button3 js-answer hover' value = '3'>" + state.questions[state.currentQuestion].answers[3] + "</button>" +
 		"</section>");
 
 		$('.js-count').text("Question: " + (state.currentQuestion + 1) + "/" + state.questions.length);
