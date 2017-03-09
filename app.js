@@ -134,7 +134,7 @@ $(function(){
 		clickAnswer($(this), state);
 	});
 
-  	$('div').on('click', '.continue-container', function(event){
+  	$('.js-continue').click(function(event){
 		
 		clickContinue(state);
 	});
