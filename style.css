@@ -1,6 +1,5 @@
 * {
 	box-sizing: border-box;
-	/*border: 1px solid red;*/
 }
 
 h1 {
@@ -14,9 +13,11 @@ body {
 	background-color: #cee8ed;
 	text-align: center;
 }
+
 .start {
 	margin: auto;
 }
+
 button {
 	width: 100%;
 	height: 60px;
@@ -29,8 +30,8 @@ button {
 	border-radius: 4px;
 }
 
-.button-chosen {
-	background-color: #86BEC8;
+.wrong-answer {
+	background-color: red;
 }
 
 .hover:hover {
@@ -59,7 +60,7 @@ button {
 	width: 25%;
 	background-color: #f9f9f9;
 	color: slategrey;
-	margin-top: 30px;
+	margin-top: 10px;
 }
 
 .continue:hover {
@@ -68,7 +69,7 @@ button {
 }
 
 .question {
-	margin-top: 70px;
+	margin-top: 50px;
 	color: #313E40;
 }
 
@@ -91,9 +92,6 @@ button {
 text-align: center;
 }
 
-/*.button-chosen {
-	background-color: #286978;
-}*/
 
 .button-correct {
 	background-color: #9DDC69;

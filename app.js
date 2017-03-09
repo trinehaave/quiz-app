@@ -11,7 +11,7 @@ var state = {
     	answers: [ 'none', 1, 2, 3 ],
     	answerCorrect: 3 },
   	{ 
-  		question: 'Which of these activies does a sloth do faster?',
+  		question: 'Which of these activities does a sloth do faster?',
     	answers: [ 'climbing', 'swimming', 'crawling', 'rolling' ],
     	answerCorrect: 1 },
   	{ 
@@ -51,65 +51,69 @@ var state = {
 	userScore: 0
 }
 
+//register when start button is clicked and removes div with heading 
+//and start button 
 function clickStart() {
 	$('.js-startPage').on('click', 'button', function(event) {
-		event.preventDefault();
+		
 		$('.js-startPage').remove();
-		$('#yup').removeClass('hidden');
+		$('#question-container').removeClass('hidden');
 	})
 };
 
-function clickAnswer(){
-	$('#yup').on('click', 'button', function(event){
+//register when an answer/button has been clicked/chosen by the user
+function clickAnswer(chosenElement, state){
 		
-		event.preventDefault();
-		var chosenAnswer = $(this).val();
+		var chosenAnswer = $(chosenElement).val();
 
-		console.log(chosenAnswer);
-
+//if the chosen answer is correct, then tell the user "correct", otherwise "wrong :("
 		if(chosenAnswer == state.questions[state.currentQuestion].answerCorrect) {
 			
 			state.userScore += 1;
 			$('.response1').text('Correct!');
-			$('.response2').text('');
-
 		} else {
 			$('.response1').text('Wrong :(');
-			$('.response2').text('The correct answer is highlighted!');
+//add class "wrong answer" so that the button that was clicked can be
+//marked with a red colour
+			$(chosenElement).addClass('wrong-answer');
 		}
 
+//add class to the correct answer so that this can be highlighted in green
 		$('.button' + state.questions[state.currentQuestion].answerCorrect).addClass('button-correct');
-		$(this).addClass('button-chosen');
+
+//remove hover class from button so the highlighted answers will still stay red and green
+//when you hover over them	
 		$('button').removeClass('hover');
 
+//show result
 		$('.result').removeClass('hidden');
-		console.log(state.userScore);
-
+//show continue button
 		$('.js-continue').removeClass('hidden');
-
+//disable the answer buttons so user cannot continue clicking them
 		$('.js-answer').attr('disabled', true);
-	});
+
+		return state;
 }
 
-function clickContinue(){
-	$('div').on('click', '.continue-container', function(event){
-		event.preventDefault();
 
+function clickContinue(state){
+//increment which question user is on by one when continue is clicked 
 		state.currentQuestion += 1;
-
+//hide continue button and result again, remove questions and answer
 		$('.js-continue').addClass('hidden');
 		$('.result').addClass('hidden');
 		$('section').remove();
 
+//if quiz is done insert "you're done" and user's score
+//remove count and score from bottom of page
 		if(state.currentQuestion > 9) {
 			$('body').append('<h1 class="end">You\'re done!</h1><p class ="endScore">You scored ' + state.userScore + " out of " + state.currentQuestion);
 			$('.js-count').remove();
 			$('.js-score').remove();
 
 		} else {
-
-
-		$('#yup').append("<section class = 'question-container col-8'>" +
+//if quiz is not done insert new question and answers and update user score and question count
+		$('#question-container').append("<section class = 'question-container col-8'>" +
 			"<p class='question'>" + state.questions[state.currentQuestion].question + "</p><br>" +
 			"<button class='button0 js-answer hover' value = '0'>" + state.questions[state.currentQuestion].answers[0] + "</button><br>" +
 			"<button class='button1 js-answer hover' value = '1'>" + state.questions[state.currentQuestion].answers[1] + "</button><br>" +
@@ -120,93 +124,19 @@ function clickContinue(){
 		$('.js-count').text("Question: " + (state.currentQuestion + 1) + "/" + state.questions.length);
 		$('.js-score').text("Correct: " + state.userScore + "/" + state.currentQuestion);
 	}
-
-
-	});
+//TODO: disable continue button
 }
 
 $(function(){
 	clickStart();
-  	clickContinue();
-  	clickAnswer();
-
-});
-
-/*
-//state modification functions
-//Pass these into event listener functions?
-
-
-
-//functions that render state
-//one single function for each part of the page that one wants to update
-function removeStartPage () {
-	$(.'js-startPage').remove();
-}
-
-function postNextQuestion () {
-	var questionPosition = state.questions[i];
-
-		$('#questionPosition').append(
-			"<div class = 'question-container col-8'>" +
-			"<p class='question'>" + questionPosition.question + "</p><br>" +
-			"<button class='button0 js-answer' value = '0'>" + .questionPosition.answers[0] + "</button><br>" +
-			"<button class='button1 js-answer' value = '1'>" + .questionPosition.answers[1] + "</button><br>" +
-			"<button class='button2 js-answer' value = '2'>" + .questionPosition.answers[2] + "</button><br>" +
-			"<button class='button3 js-answer' value = '3'>" + .questionPosition.answers[3] + "</button>" +
-		"</div>" +)
-}
-
-function showContinueButton() {
-	$('.continue').removeClass('hidden');
-}
-
-/*
-Render functions example from Thinkful
-
-var renderList = function(state, element) {
-    var itemsHTML = state.items.map(function(item) {
-        return '<li>' + item + '</li>';
-    });
-    element.html(itemsHTML);
-};*/
-
-
-
-/*
-function clickStart(){
-	$('button')on('click', '.js-answer', function(event){
-		//if right, alert right, else if wrong, alert wrong and show correct answer
-		//show continue button
-		//remove hidden class for page count and right answers?
-});
-}
-
-function clickContinue(){
-	$('button')on('click', '.js-continue', function(event){
-		//some function that removes old question
-		state.currentQuestion += 1;
-		$()
-		//some function that shows new question
-		//increment count for question
-	$('.js-continue').addClass('hidden');
-
+	$('#question-container').on('click', 'button', function(event){
+		
+		clickAnswer($(this), state);
 	});
-}
 
-function clickAnswer(){
-	$('button')on('click', '.js-answer', function(event){
-		//if right alert right, else if wrong alert wrong and correct answer
-		var chosenAnswer = $(this).val();
-		if( chosenAnswer === answercorrect[i]) {
-			//increment number of right or wromg answers
-			state.userScore += 1;
-		}
+  	$('div').on('click', '.continue-container', function(event){
+		
+		clickContinue(state);
+	});
 
-		$('.js-continue').removeClass('hidden');
-
-		//show continue button
-		//remove class hidden from continue button
 });
-}
-*/
