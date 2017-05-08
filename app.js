@@ -73,6 +73,7 @@ function clickAnswer(chosenElement, state){
 			$('.response1').text('Correct!');
 		} else {
 			$('.response1').text('Wrong :(');
+			
 //add class "wrong answer" so that the button that was clicked can be
 //marked with a red colour
 			$(chosenElement).addClass('wrong-answer');
