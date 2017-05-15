@@ -135,7 +135,7 @@ function clickContinue(state) {
     $('.js-count').text("Question: " + (state.currentQuestion + 1) + "/" + state.questions.length);
     $('.js-score').text("Correct: " + state.userScore + "/" + state.currentQuestion);
   }
-  
+
 }
 
 $(function() {
